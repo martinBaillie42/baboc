@@ -1,5 +1,12 @@
 # Django settings for baboc project.
 
+from os.path import abspath, dirname, join
+from os import pardir
+
+# used to avoid absolute URLs
+APP_ROOT = abspath(dirname(__file__))
+PROJECT_ROOT = abspath(join(APP_ROOT, pardir))
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -11,13 +18,13 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': join(APP_ROOT, 'baboc.db').replace('\\', '/'),  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'HOST': '',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '',  # Set to empty string for default.
     }
 }
 
